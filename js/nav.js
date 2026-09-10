@@ -1,8 +1,9 @@
 document.querySelectorAll('nav').forEach(nav => {
   if (nav.querySelector('.menu-btn')) return;
   const brand = nav.querySelector('.brand');
-  const links = nav.querySelector('div');
+  const links = nav.querySelector(':scope > div');
   if (!brand || !links) return;
+  if (nav.querySelector('.nav-row')) return;
   const row = document.createElement('div');
   row.className = 'nav-row';
   const btn = document.createElement('button');
@@ -12,18 +13,14 @@ document.querySelectorAll('nav').forEach(nav => {
   btn.setAttribute('aria-expanded', 'false');
   btn.innerHTML = '<span></span>';
   links.classList.add('nav-links');
-  const cta = links.querySelector('.button');
-  if (cta) {
-    cta.closest('div')?.classList.add('nav-cta');
-  }
   row.append(brand, btn);
   nav.prepend(row);
-  nav.append(links);
+  brand.remove();
   btn.addEventListener('click', () => {
     const open = links.classList.toggle('open');
     btn.setAttribute('aria-expanded', String(open));
   });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  links.querySelectorAll('a, button').forEach(a => a.addEventListener('click', () => {
     if (innerWidth <= 820) {
       links.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
