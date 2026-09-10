@@ -1,35 +1,11 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
+  "database": { "rules": "database.rules.json" },
   "hosting": {
     "public": ".",
-    "ignore": [
-      "firebase.json",
-      "database.rules.json",
-      "storage.rules",
-      "README.md",
-      ".firebaserc"
-    ],
+    "ignore": ["firebase.json", "database.rules.json", "storage.rules", "README.md", ".firebaserc", ".gitignore"],
     "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
-      },
-      {
-        "source": "*.{js,css}",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=300, public"
-          }
-        ]
-      }
+      { "source": "**", "headers": [{ "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" }] },
+      { "source": "*.{js,css}", "headers": [{ "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" }] }
     ]
   }
 }
