@@ -2,4 +2,4 @@
 const msg=document.querySelector('#msg'),btn=document.querySelector('#btn');
 const nameInput=document.querySelector('#name'),emailInput=document.querySelector('#email'),passwordInput=document.querySelector('#password');
 document.querySelector('#form').addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';msg.className='msg';btn.disabled=true;btn.textContent='Memproses...';try{await register(nameInput.value,emailInput.value,passwordInput.value);location.href='dashboard.html'}catch(err){msg.textContent=err.message;msg.className='msg err';btn.disabled=false;btn.textContent='Buat Akun'}});
-</script>  <script src="js/nav.js?v=10"></script>`n</body></html>
+</script>  <script src="js/nav.js?v=10"></script></body></html>
