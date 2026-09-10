@@ -1,0 +1,10 @@
+.dash{padding:24px max(5vw,20px) 32px;display:grid;gap:16px}
+.dash h1{margin:0;font-size:34px;letter-spacing:-.06em}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.kpi div{background:#fff;border:1px solid #e6ebe8;border-radius:18px;padding:16px;box-shadow:0 8px 20px rgba(16,48,33,.07)}
+.kpi strong{font:800 26px Plus Jakarta Sans,sans-serif;color:#0f7a4a;display:block;letter-spacing:-.05em}
+.kpi span{color:#6b7c74;font:600 12px Plus Jakarta Sans,sans-serif;letter-spacing:.02em}
+.panel{background:#fff;border:1px solid #e6ebe8;border-radius:18px;padding:18px;box-shadow:0 8px 20px rgba(16,48,33,.07)}
+.panel h2{margin:0;font-size:18px}
+@media(max-width:900px){.kpi{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.dash{padding:18px 14px 28px}.kpi{grid-template-columns:1fr}}

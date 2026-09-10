@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin - BantuSekitar</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    #adminCards { display: none; grid-template-columns: 1fr; gap: 12px; }
+    @media (max-width: 760px) {
+      .table-wrap { display: none; }
+      #adminCards { display: grid; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="index.html">BantuSekitar</a>
+    <div>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="reports.html">Laporan</a>
+    </div>
+  </nav>
+
+  <div style="padding:22px max(5vw,20px);display:grid;gap:16px">
+    <div class="panel" style="padding:16px">
+      <h1 style="margin:0">Admin Dashboard</h1>
+      <p class="muted" style="margin:4px 0 0">Role dicek dari Realtime Database <code>users/{uid}/role = admin</code>. Di HP tampil card, di desktop tabel.</p>
+    </div>
+
+    <div id="adminStats" class="kpi"></div>
+
+    <div class="table-wrap">
+      <table id="adminTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Judul</th>
+            <th>Kategori</th>
+            <th>Pelapor</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7">Memuat...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="adminCards"></div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+  <script src="js/nav.js"></script>`n</body>
+</html>

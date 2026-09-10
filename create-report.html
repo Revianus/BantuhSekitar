@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Buat Laporan - BantuSekitar</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    #map { height: 360px; border-radius: 18px; margin-top: 10px; border: 1px solid #e6ebe8; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    #searchResults { display: none; margin-top: 8px; border: 1px solid #e6ebe8; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 12px 24px rgba(16,48,33,.10); }
+    #searchResults button { display: block; width: 100%; text-align: left; padding: 11px 12px; border: 0; border-bottom: 1px solid #eef2f0; background: #fff; cursor: pointer; font: 500 13px Inter, sans-serif; }
+    #searchResults button:last-child { border-bottom: 0; }
+    #searchResults button:hover { background: #f7faf8; }
+    @media(max-width: 700px) { .grid2 { grid-template-columns: 1fr; } #map { height: 320px; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="index.html">BantuSekitar</a>
+    <div>
+      <a href="reports.html">Laporan</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+  </nav>
+
+  <div style="max-width:860px;margin:0 auto;padding:22px">
+    <form id="form" class="auth-card" style="width:100%;max-width:none">
+      <h1>Buat Laporan</h1>
+      <p class="muted">Cari alamat, atau klik peta, atau pakai lokasi saya. Alamat akurat dari Nominatim + koordinat presisi disimpan.</p>
+
+      <label>Judul Laporan *</label>
+      <input id="title" required placeholder="Contoh: Jalan berlubang di Jl. Merdeka">
+
+      <label>Kategori *</label>
+      <select id="category" required>
+        <option>Jalan Rusak</option>
+        <option>Sampah</option>
+        <option>Lampu Jalan</option>
+        <option>Pohon</option>
+        <option>Saluran Air</option>
+        <option>Fasilitas Umum</option>
+        <option>Lainnya</option>
+      </select>
+
+      <label>Deskripsi *</label>
+      <textarea id="description" rows="4" required placeholder="Jelaskan detail masalah dan lokasinya..."></textarea>
+
+      <label>Upload Foto (Opsional)</label>
+      <input id="photo" type="file" accept="image/*">
+
+      <label>Atau URL Foto (Opsional)</label>
+      <input id="photoUrlInput" type="url" placeholder="https://example.com/foto.jpg">
+
+      <label>Cari Alamat</label>
+      <div style="display:flex;gap:8px">
+        <input id="addressSearch" placeholder="Ketik nama jalan / desa / kecamatanâ€¦">
+        <button type="button" id="searchBtn" class="button secondary" style="width:auto;white-space:nowrap;padding:11px 16px">Cari</button>
+      </div>
+      <div id="searchResults"></div>
+
+      <label>Lokasi Presisi *</label>
+      <div class="grid2">
+        <input id="lat" placeholder="Latitude" readonly required>
+        <input id="lng" placeholder="Longitude" readonly required>
+      </div>
+      <input id="address" placeholder="Alamat akurat muncul di sini â€” bisa diedit" style="margin-top:10px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <button type="button" id="useLocation" class="button secondary" style="width:auto">Gunakan Lokasi Saya</button>
+        <button type="button" id="copyCoords" class="button secondary" style="width:auto">Salin Koordinat</button>
+      </div>
+      <div id="locationStatus" class="msg" aria-live="polite">Tip: cari alamat di atas, lalu klik salah satu hasil â€” peta otomatis pindah. Atau klik langsung pada peta.</div>
+
+      <div id="map"></div>
+      <p class="muted" style="margin:8px 0 0;font-size:12px">Sumber peta: OpenStreetMap. Geocoding: Nominatim (zoom 18, presisi bangunan). Jika alamat kurang pas, edit manual.</p>
+
+      <button id="submitBtn" type="submit">Kirim Laporan</button>
+      <div id="msg" class="msg"></div>
+    </form>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/create-report.js"></script>
+  <script src="js/nav.js"></script>`n</body>
+</html>

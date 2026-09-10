@@ -1,0 +1,6 @@
+.table-wrap{overflow:auto;background:#fff;border:1px solid #e6ebe8;border-radius:18px;box-shadow:0 8px 20px rgba(16,48,33,.07)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:12px 14px;border-bottom:1px solid #eef2f0;text-align:left;font-size:13px}
+th{background:#f7faf9;white-space:nowrap;font:700 12px Plus Jakarta Sans,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#24352e}
+td .button{padding:8px 12px;font-size:12px}
+.statusSelect{padding:8px 10px;border-radius:999px;border:1px solid #e6ebe8;background:#fff;font:600 12px Plus Jakarta Sans,sans-serif}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Daftar Laporan - BantuSekitar</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reports.css">
+</head>
+<body>
+  <nav>
+    <a class="brand" href="index.html">BantuSekitar</a>
+    <div>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="my-reports.html">Laporan Saya</a>
+      <a class="button" href="create-report.html">Buat Laporan</a>
+    </div>
+  </nav>
+
+  <div class="container" style="padding-top:22px">
+    <div class="panel" style="padding:18px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:end">
+        <div>
+          <h1 style="margin:0;font-size:30px">Daftar Laporan</h1>
+          <p class="muted" style="margin:4px 0 0">Semua laporan publik realtime dari Firebase. Search + filter kategori/status.</p>
+        </div>
+        <span class="badge Selesai">Realtime onValue</span>
+      </div>
+      <div class="toolbar" style="margin-bottom:0">
+        <input id="q" placeholder="Cari judul / deskripsi...">
+        <select id="cat">
+          <option value="">Semua kategori</option>
+          <option>Jalan Rusak</option>
+          <option>Sampah</option>
+          <option>Lampu Jalan</option>
+          <option>Pohon</option>
+          <option>Saluran Air</option>
+          <option>Fasilitas Umum</option>
+          <option>Lainnya</option>
+        </select>
+        <select id="status">
+          <option value="">Semua status</option>
+          <option>Menunggu</option>
+          <option>Diverifikasi</option>
+          <option>Diproses</option>
+          <option>Selesai</option>
+          <option>Ditolak</option>
+        </select>
+        <select id="sort">
+          <option value="newest">Terbaru</option>
+          <option value="oldest">Terlama</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="grid" class="report-grid" style="margin-top:16px">
+      <div class="report-card" style="padding:14px;gap:10px;display:grid"><span class="skeleton" style="height:160px;border-radius:14px"></span><span class="skeleton" style="height:14px;width:70%"></span><span class="skeleton" style="height:12px;width:50%"></span></div>
+      <div class="report-card" style="padding:14px;gap:10px;display:grid"><span class="skeleton" style="height:160px;border-radius:14px"></span><span class="skeleton" style="height:14px;width:70%"></span><span class="skeleton" style="height:12px;width:50%"></span></div>
+      <div class="report-card" style="padding:14px;gap:10px;display:grid"><span class="skeleton" style="height:160px;border-radius:14px"></span><span class="skeleton" style="height:14px;width:70%"></span><span class="skeleton" style="height:12px;width:50%"></span></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { ref, onValue } from 'https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js';
+    import { db } from './js/firebase-config.js';
+    const grid = document.querySelector('#grid'), q = document.querySelector('#q'), cat = document.querySelector('#cat'), status = document.querySelector('#status'), sort = document.querySelector('#sort');
+    let all = [];
+    onValue(ref(db, 'reports'), snap => {
+      all = Object.entries(snap.val() || {}).map(([id, v]) => ({ id, ...v }));
+      render();
+    }, err => grid.innerHTML = `<div class="card" style="grid-column:1/-1;padding:18px">Gagal memuat: ${esc(err.message)}</div>`);
+    function render() {
+      let list = [...all];
+      const qq = q.value.trim().toLowerCase();
+      if (qq) list = list.filter(r => (r.title || '').toLowerCase().includes(qq) || (r.description || '').toLowerCase().includes(qq));
+      if (cat.value) list = list.filter(r => r.category === cat.value);
+      if (status.value) list = list.filter(r => r.status === status.value);
+      list.sort((a, b) => sort.value === 'oldest' ? (a.createdAt || 0) - (b.createdAt || 0) : (b.createdAt || 0) - (a.createdAt || 0));
+      if (!list.length) { grid.innerHTML = '<div class="card" style="grid-column:1/-1;padding:22px;text-align:center"><strong>Tidak ada laporan ditemukan.</strong><p class="muted" style="margin:6px 0 0">Coba ubah filter atau buat laporan baru.</p></div>'; return; }
+      grid.innerHTML = list.map(r => `<a href="report-detail.html?id=${encodeURIComponent(r.id)}" class="report-card" style="text-decoration:none;color:inherit"><img src="${escAttr(r.photoUrl || 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80&auto=format&fit=crop')}" alt=""><div class="body"><span class="badge ${escAttr(r.status || 'Menunggu')}">${esc(r.status || 'Menunggu')}</span><strong style="font:700 15px Plus Jakarta Sans,sans-serif;letter-spacing:-.04em;line-height:1.35">${esc(r.title || 'Tanpa judul')}</strong><span class="muted" style="font-size:12px">${esc(r.category || '')} Â· ${esc(new Date(r.createdAt || Date.now()).toLocaleDateString('id-ID'))}</span><span class="muted" style="font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc((r.address || '').slice(0, 70))}</span></div></a>`).join('');
+    }
+    q.addEventListener('input', render); cat.addEventListener('change', render); status.addEventListener('change', render); sort.addEventListener('change', render);
+    function esc(v) { return String(v).replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#039;', '"': '&quot;' }[c])); }
+    function escAttr(v) { return String(v).replace(/"/g, '&quot;'); }
+  </script>
+  <script src="js/nav.js"></script>`n</body>
+</html>

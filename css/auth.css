@@ -1,0 +1,14 @@
+.auth-wrap{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:28px 18px;background:radial-gradient(900px 500px at 20% 0%, #e7f6ee 0%, transparent 60%), radial-gradient(800px 500px at 90% 100%, #e8eefc 0%, transparent 60%), #f4f6f5}
+.auth-card{width:min(520px,100%);background:#fff;border:1px solid #e6ebe8;border-radius:22px;padding:26px 24px;box-shadow:0 18px 40px rgba(16,48,33,.08)}
+.auth-card h1{margin:0 0 6px;font:800 28px Plus Jakarta Sans,sans-serif;letter-spacing:-.05em}
+.auth-card p{color:#6b7c74;margin:0 0 16px}
+.auth-card label{display:block;margin:14px 0 7px;font:700 12px Plus Jakarta Sans,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#24352e}
+.auth-card input,.auth-card select,.auth-card textarea{padding:13px 14px;border-radius:14px}
+.auth-card button[type="submit"],#saveBtn{width:100%;margin-top:18px;padding:13px 16px;border-radius:999px;background:linear-gradient(135deg,#13a86a,#0f7a4a);color:#fff;border:0;font:700 14px Plus Jakarta Sans,sans-serif;box-shadow:0 12px 22px rgba(15,122,74,.22);cursor:pointer}
+.auth-card button:disabled{opacity:.6;cursor:not-allowed}
+.msg{margin-top:12px;min-height:20px;font:500 13px Inter,sans-serif}
+.msg.err{color:#b42318}
+.msg.ok{color:#0f7a4a}
+.auth-card a{color:#0f7a4a;font-weight:600;text-decoration:none}
+.auth-card a:hover{text-decoration:underline}
+#map{border:1px solid #e6ebe8}
