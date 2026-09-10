@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>BantuSekitar — Laporkan, Pantau, Selesaikan</title>
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=12">
   <link rel="preconnect" href="https://unpkg.com">
 </head>
 <body>
@@ -36,16 +36,25 @@
     </section>
 
     <section class="hero-side">
-      <div class="hero-map-card">
-        <div style="display:flex;align-items:center;gap:10px">
-          <span class="badge Selesai">Realtime</span>
-          <span class="muted" style="font:600 12px Plus Jakarta Sans,sans-serif">Leaflet + OpenStreetMap</span>
+      <div class="hero-map-card" style="padding:0;overflow:hidden;min-height:340px">
+        <div style="height:170px;background:linear-gradient(135deg,#d1fae5,#ecfdf5 40%,#fff), url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80&auto=format&fit=crop') center/cover;position:relative">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(255,255,255,.92) 100%)"></div>
+          <div style="position:absolute;left:14px;top:14px;display:flex;gap:8px;align-items:center">
+            <span class="badge Selesai" style="box-shadow:0 4px 12px rgba(16,48,33,.15)">Realtime</span>
+            <span style="font:600 11px 'Plus Jakarta Sans',sans-serif;background:rgba(255,255,255,.9);padding:6px 10px;border-radius:99px;border:1px solid #e6ebe8">Leaflet + OpenStreetMap</span>
+          </div>
+          <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:#0f7a4a;box-shadow:0 0 0 8px rgba(15,122,74,.18), 0 6px 16px rgba(0,0,0,.2)"></div>
+          <div style="position:absolute;right:18px;bottom:18px;background:#fff;border:1px solid #e6ebe8;border-radius:12px;padding:8px 10px;box-shadow:0 8px 20px rgba(16,48,33,.12);display:flex;align-items:center;gap:8px;font:700 11px 'Plus Jakarta Sans',sans-serif"><span style="width:8px;height:8px;border-radius:50%;background:#0f7a4a;display:inline-block"></span> Live update</div>
         </div>
-        <h2 style="margin:10px 0 6px;font-size:22px">Laporan warga terpantau.</h2>
-        <p class="muted" style="margin:0">Klik laporan untuk melihat peta, foto, dan timeline status sampai tuntas.</p>
-        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <a class="button" href="reports.html" style="flex:1 1 160px;justify-content:center">Jelajahi laporan</a>
-          <a class="button secondary" href="register.html" style="flex:1 1 160px;justify-content:center">Daftar gratis</a>
+        <div style="padding:16px 18px;display:grid;gap:10px;background:#fff">
+          <h2 style="margin:0;font-size:20px;letter-spacing:-.04em">Laporan warga terpantau.</h2>
+          <p class="muted" style="margin:0;font-size:13px;line-height:1.6">Klik laporan untuk melihat peta, foto, dan timeline status sampai tuntas.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px">
+            <div style="background:#f4f6f5;border:1px solid #e6ebe8;border-radius:12px;padding:10px;text-align:center"><strong style="display:block;font:800 16px 'Plus Jakarta Sans',sans-serif;color:#0f7a4a" id="miniTotal">—</strong><span class="muted" style="font:600 10px 'Plus Jakarta Sans',sans-serif">Total</span></div>
+            <div style="background:#fff7d6;border:1px solid #f3e2a3;border-radius:12px;padding:10px;text-align:center"><strong style="display:block;font:800 16px 'Plus Jakarta Sans',sans-serif;color:#7a5c00" id="miniPending">—</strong><span class="muted" style="font:600 10px 'Plus Jakarta Sans',sans-serif">Menunggu</span></div>
+            <div style="background:#dff6e2;border:1px solid #bfe8c3;border-radius:12px;padding:10px;text-align:center"><strong style="display:block;font:800 16px 'Plus Jakarta Sans',sans-serif;color:#175a22" id="miniDone">—</strong><span class="muted" style="font:600 10px 'Plus Jakarta Sans',sans-serif">Selesai</span></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:4px"><a class="button" href="reports.html" style="flex:1;justify-content:center">Jelajahi laporan</a><a class="button secondary" href="register.html" style="flex:1;justify-content:center">Daftar gratis</a></div>
         </div>
       </div>
       <div class="panel" style="padding:16px">
@@ -75,7 +84,7 @@
     </div>
   </section>
 
-  <script src="js/nav.js?v=11"></script>
+  <script src="js/nav.js?v=12"></script>
   <script type="module" src="js/firebase-config.js"></script>
   <script type="module" src="js/reports.js"></script>
 </body>

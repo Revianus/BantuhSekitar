@@ -11,9 +11,13 @@ onValue(ref(db, 'reports'), snapshot => {
   const reports = Object.entries(raw).map(([id, value]) => ({ id, ...value }));
   reports.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
 
+  const miniTotal = document.querySelector('#miniTotal'), miniPending = document.querySelector('#miniPending'), miniDone = document.querySelector('#miniDone');
   if (total) total.textContent = String(reports.length);
+  if (miniTotal) miniTotal.textContent = String(reports.length);
   if (pending) pending.textContent = String(reports.filter(item => item.status === 'Menunggu').length);
+  if (miniPending) miniPending.textContent = String(reports.filter(item => item.status === 'Menunggu').length);
   if (done) done.textContent = String(reports.filter(item => item.status === 'Selesai').length);
+  if (miniDone) miniDone.textContent = String(reports.filter(item => item.status === 'Selesai').length);
 
   if (!latest) return;
 
