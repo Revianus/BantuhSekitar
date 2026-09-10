@@ -14,7 +14,24 @@ else {
     const r = snap.val();
     if (!r) { detailEl.innerHTML = '<p class="muted">Data laporan tidak ditemukan.</p>'; return; }
     reportData = { id, ...r };
-    detailEl.innerHTML = `<img src="${escapeAttr(r.photoUrl||'https://via.placeholder.com/800x400?text=No+Image')}" style="width:100%;max-height:360px;object-fit:cover;border-radius:14px"><h1>${escapeHtml(r.title)}</h1><p><span class="badge ${escapeAttr(r.status)}">${escapeHtml(r.status)}</span> ${escapeHtml(r.category)} · ${new Date(r.createdAt).toLocaleString('id-ID')}</p><p>${escapeHtml(r.description)}</p><p class="muted">${escapeHtml(r.address||'')} (${r.latitude}, ${r.longitude})</p><div style="margin-top:12px"><strong>Pelapor:</strong> ${escapeHtml(r.userName||'-')}</div>`;
+    const votes = r.votes || 0;
+    detailEl.innerHTML = `
+      <img src="${escapeAttr(r.photoUrl||'https://via.placeholder.com/800x400?text=No+Image')}" style="width:100%;max-height:360px;object-fit:cover;border-radius:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+        <h1 style="margin:0">${escapeHtml(r.title)}</h1>
+        <button id="likeBtn" class="button secondary" style="padding:8px 16px">${votes} 👍</button>
+      </div>
+      <p><span class="badge ${escapeAttr(r.status)}">${escapeHtml(r.status)}</span> ${escapeHtml(r.category)} · ${new Date(r.createdAt).toLocaleString('id-ID')}</p>
+      <p>${escapeHtml(r.description)}</p>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <a href="https://wa.me/?text=${encodeURIComponent('Cek laporan BantuSekitar: '+r.title+' - '+location.href)}" target="_blank" class="button" style="background:#25D366;box-shadow:none">Bagikan WA</a>
+      </div>
+      <p class="muted">${escapeHtml(r.address||'')} (${r.latitude}, ${r.longitude})</p>
+      <div style="margin-top:12px"><strong>Pelapor:</strong> ${escapeHtml(r.userName||'-')}</div>
+    `;
+    document.querySelector('#likeBtn').addEventListener('click', async()=>{
+       await update(ref(db, `reports/${id}`), { votes: (r.votes||0) + 1 });
+    });
     if (!map) { map = L.map('map').setView([r.latitude||-6.2, r.longitude||106.83], 15); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map); }
     if (marker) map.removeLayer(marker);
     if (r.latitude && r.longitude) { marker = L.marker([r.latitude, r.longitude]).addTo(map); map.setView([r.latitude, r.longitude], 15); }
